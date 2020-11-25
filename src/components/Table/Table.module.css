@@ -1,0 +1,19 @@
+.table {
+    width: 90vw;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.body {
+    width: 100%;
+}
+
+.item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
