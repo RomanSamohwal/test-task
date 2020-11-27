@@ -14,7 +14,7 @@ export const DetailRowView = (props: any) => {
             </thead>
             <tbody>
             {props.data.map((item: any) => (
-                <tr>
+                <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.name}</td>
                     <td>{item.processId}</td>

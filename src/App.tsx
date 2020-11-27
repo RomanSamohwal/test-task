@@ -3,7 +3,8 @@ import {v1} from 'uuid';
 import './App.css';
 import _ from 'lodash';
 import {DetailRowView} from './components/DatailRowView/DetailRowView';
-import {TableClone} from './components/Table/TableClone';
+import {Table} from './components/Table/Table';
+import {generatorJob, generatorProcessObject} from './components/utils/GeneraorProcessObject';
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
   let [sortField, setSortField] = useState('id')
   let [row, setRow] = useState<any>(null)
   let [isSelectedRow, setIsSelectedRow ] = useState(false)
+  let [allJobs, setAllJobs] = useState<JobsArrayType>([])
+  let [inputValue, setInputValue] = useState('')
 
   const onSort = (sortField: any) => {
     const cloneData = processes.concat();
@@ -42,8 +45,6 @@ function App() {
 
   const onRowSelect = (id: any) => {
     let selectedRow = jobs[id]
-    console.log(id)
-    console.log(selectedRow)
     setRow(selectedRow)
     setIsSelectedRow(true)
   }
@@ -54,54 +55,67 @@ function App() {
 
 
   const addNewProcess = () => {
-    const processId1 = v1()
-    const process =  {id: processId1, name: 'Process1' ,jobsCount: 2 , startTime : 12}
-    const job = {id: jobId4, name: 'JobProc1', processId: processId1, status: JobStatuses.running}
+    const process =  generatorProcessObject()
+    const processId = process.id
+    const newJobsArray = []
+    for (let i = 0; i < process.jobsCount; i++) {
+      let newJob = generatorJob(processId)
+      newJobsArray.push(newJob)
+    }
 
     const copyJobs = {...jobs}
-    const newJobs = [job,job]
-    copyJobs[processId1] = newJobs
+    copyJobs[processId] = newJobsArray
     setJobs(copyJobs)
     setProcess([process,...processes])
+    //all jobs
+    const copyAllJobsArray = [...newJobsArray,...allJobs]
+    setAllJobs(copyAllJobsArray)
   }
 
   const deleteProcess = (id: string) => {
-    const newProcess = processes.filter((i) => {
-      if (i.id !== id) {
-        return true
-      }
-    })
+    setProcess(processes.filter(i=>i.id !== id))
+    delete jobs[id]
+  }
 
-    alert(id)
+  const onFindJob = () => {
+    const findJob = allJobs.filter(i=>i.name.includes(inputValue))
+    setRow(findJob)
+    setIsSelectedRow(true)
   }
 
   return (
       <div className="App">
-         <div>
+        <div>
+          <input type="text"  onChange={(e)=>{
+            setInputValue(e.currentTarget.value)
+          }} value={inputValue}/>
+          <button onClick={onFindJob}>find job</button>
+        </div>
+        <div>
            <button onClick={addNewProcess}>add process</button>
          </div>
 
         {isSelectedRow
             ? <DetailRowView closeTable={isSelectedHandler} data={row}/>
-            : <TableClone data={processes} onSort={onSort} onRowSelect={onRowSelect}
+            : <Table data={processes} onSort={onSort} onRowSelect={onRowSelect}
                           addProcess={addNewProcess} delete={deleteProcess}/>}
       </div>
   );
 }
 
 export default App;
-export type ProcessType = {
-  id: string
-  name: string
-  startTime: number
-  jobsCount: number
-}
 
 export type JobType = {
   id: string
   processId: string
   name: string
   status: JobStatuses
+}
+export type ProcessType = {
+  id: string
+  name: string
+  startTime: number
+  jobsCount: number
 }
 
 export type ProcessesType = Array<ProcessType>
@@ -117,3 +131,4 @@ export enum JobStatuses {
 }
 
 export type RequestStatusType = 'running' | 'successed' | 'failed'
+
