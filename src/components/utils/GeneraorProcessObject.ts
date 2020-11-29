@@ -23,7 +23,7 @@ export const generatorJob = (processId: string): JobType => {
     const id = v1()
     const name = randomNameGenerator()
     const number = Math.floor(Math.random() * 3);
-    let status: JobStatuses = JobStatuses.failed
+    let status: JobStatuses
     switch (number) {
         case 0: {
             status = JobStatuses.failed;
@@ -34,7 +34,7 @@ export const generatorJob = (processId: string): JobType => {
             break
         }
         default : {
-            status = JobStatuses.failed
+            status = JobStatuses.running
         }
     }
     return {id, name, processId, status}

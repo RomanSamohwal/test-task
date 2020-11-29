@@ -1,17 +1,29 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit"
-import {v1} from 'uuid';
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit"
+import {processId1, processId2} from "./ProcessesId";
+import {restoreProcesses} from './dal/localStorage';
+import {isValidElement} from 'react';
 
-const processId1 = v1()
-const processId2 = v1()
-
-const initialState = [
+/*const initialState = [
     {id: processId1, name: 'Process1', jobsCount: 2, startTime: 12},
     {id: processId2, name: 'Process2', jobsCount: 3, startTime: 13}
-]
+]*/
+
+const initialState = [] as ProcessesType
+
+export const fetchProcesses = createAsyncThunk('processes/fetchProcesses',
+     async (param, {dispatch, rejectWithValue}) => {
+        try {
+            let processes = await restoreProcesses()
+            debugger
+            return {processes}
+        } catch (error) {
+
+        }
+    })
 
 const slice = createSlice({
     name: 'processes',
-    initialState: initialState as ProcessesType,
+    initialState: initialState,
     reducers: {
         addProcess(state, action: PayloadAction<{ process: ProcessType }>) {
             state.unshift({...action.payload.process})
@@ -22,6 +34,12 @@ const slice = createSlice({
         orderProcess(state, action: PayloadAction<{ process: ProcessesType }>) {
             return action.payload.process
         }
+    },
+    extraReducers: builder => {
+        builder.addCase(fetchProcesses.fulfilled, (state, action) => {
+            // @ts-ignore
+          return action.payload.processes
+        })
     }
 })
 

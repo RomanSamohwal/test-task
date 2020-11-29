@@ -49,13 +49,12 @@ function App() {
     setIsSelectedRow(true)
   }
 
-  const isSelectedHandler = () =>{
+  const isSelectedHandler = () => {
     setIsSelectedRow(false)
   }
 
-
   const addNewProcess = () => {
-    const process =  generatorProcessObject()
+    const process = generatorProcessObject()
     const processId = process.id
     const newJobsArray = []
     for (let i = 0; i < process.jobsCount; i++) {
@@ -66,14 +65,14 @@ function App() {
     const copyJobs = {...jobs}
     copyJobs[processId] = newJobsArray
     setJobs(copyJobs)
-    setProcess([process,...processes])
+    setProcess([process, ...processes])
     //all jobs
-    const copyAllJobsArray = [...newJobsArray,...allJobs]
+    const copyAllJobsArray = [...newJobsArray, ...allJobs]
     setAllJobs(copyAllJobsArray)
   }
 
   const deleteProcess = (id: string) => {
-    setProcess(processes.filter(i=>i.id !== id))
+    setProcess(processes.filter(i => i.id !== id))
     delete jobs[id]
   }
 

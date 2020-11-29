@@ -2,9 +2,11 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk'
 import {appProcesses} from '../process-reducer';
 import {useDispatch} from 'react-redux';
+import { appJobs } from '../jobs-reducer';
 
 const rootReducer = combineReducers({
-    processes: appProcesses
+    processes: appProcesses,
+    jobs: appJobs
 })
 
 export type RootReducerType = typeof rootReducer
