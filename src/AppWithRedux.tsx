@@ -4,8 +4,8 @@ import _ from 'lodash';
 import {generatorJob, generatorProcessObject} from './components/utils/GeneraorProcessObject';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from './store/store';
-import {addProcess, deleteProcess, fetchProcesses, orderProcess, ProcessesType} from './process-reducer';
-import {addJobs, deleteJobs, fetchJobs, JobsType, JobType} from './jobs-reducer';
+import {addProcess, deleteProcess, fetchProcesses, orderProcess, ProcessesType, saveProcess} from './process-reducer';
+import {addJobs, deleteJobs, fetchJobs, JobsType, saveJob} from './jobs-reducer';
 import {DetailRowView} from './components/DatailRowView/DetailRowView';
 
 export const AppWithReducer =  React.memo((props: any) => {
@@ -49,6 +49,8 @@ export const AppWithReducer =  React.memo((props: any) => {
     const onDeleteProcess = (id: string) => {
         dispatch(deleteProcess({id}))
         dispatch(deleteJobs({id}))
+        dispatch(saveProcess())
+        dispatch(saveJob())
     }
 
     const onAddProcess = () => {
@@ -61,6 +63,8 @@ export const AppWithReducer =  React.memo((props: any) => {
         }
         dispatch(addProcess({process}))
         dispatch(addJobs({id: processId, jobs: newJobs}))
+        dispatch(saveProcess())
+        dispatch(saveJob())
     }
 
     const onFindJob = () => {

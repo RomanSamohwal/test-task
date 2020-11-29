@@ -12,24 +12,6 @@ let initProcess = [
     {id: processId2, name: 'Process2', jobsCount: 3, startTime: 13}
 ]
 
-// @ts-ignore
-/*let initJobs = {
-    // @ts-ignore
-    [processId1]: [{id: jobId1, name: 'JobProc1', processId: processId1, status: JobStatuses.running}, {
-        id: jobId2,
-        name: 'JobProc1',
-        processId: processId1,
-        status: JobStatuses.running
-    }],
-   // @ts-ignore
-    [processId2]: [{id: jobId3, name: 'JobProc2', processId: processId2, status: JobStatuses.failed}, {
-        id: jobId4,
-        name: 'JobProc2',
-        processId: processId2,
-        status: JobStatuses.failed
-    }, {id: jobId5, name: 'JobProc2', processId: processId2, status: JobStatuses.failed}]
-}*/
-
 let initJobs = [{id: jobId1, name: 'JobProc1', processId: processId1, status: JobStatuses.running},
     {id: jobId3, name: 'JobProc2', processId: processId2, status: JobStatuses.failed}, {
         id: jobId4,

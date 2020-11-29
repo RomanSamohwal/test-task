@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit"
 import {processId1, processId2} from "./ProcessesId";
-import {restoreProcesses} from './dal/localStorage';
+import {restoreProcesses, saveProcesses} from './dal/localStorage';
 import {isValidElement} from 'react';
 
 /*const initialState = [
@@ -11,11 +11,24 @@ import {isValidElement} from 'react';
 const initialState = [] as ProcessesType
 
 export const fetchProcesses = createAsyncThunk('processes/fetchProcesses',
-     async (param, {dispatch, rejectWithValue}) => {
+     async (param, {dispatch, rejectWithValue,getState}) => {
         try {
             let processes = await restoreProcesses()
-            debugger
             return {processes}
+        } catch (error) {
+
+        }
+    })
+
+export const saveProcess = createAsyncThunk('processes/saveProcess',
+    async (param, {dispatch, rejectWithValue,getState}) => {
+        try {
+            debugger
+            let state = getState()
+            // @ts-ignore
+            let allProcesses  = state.processes
+            await saveProcesses(allProcesses)
+            return
         } catch (error) {
 
         }
