@@ -14,13 +14,13 @@ export const Table = React.memo((props: any) => {
             </thead>
             <tbody>
             {props.data.map((item: any) => (
-                <tr>
+                <tr key ={item.id}>
                     <td>{item.id}</td>
                     <td>{item.name}</td>
                     <td>{item.jobsCount}</td>
                     <td>{item.startTime}</td>
-                    <td>any process..</td>
-                    <td key={item.id} onClick={() => props.onRowSelect(item.id)}>jobs list</td>
+                    <td>{item.status}</td>
+                    <td onClick={() => props.onRowSelect(item.id)}>jobs list</td>
                     <td><button onClick={()=>{props.delete(item.id)}}>delete</button> </td>
                 </tr>
             ))}

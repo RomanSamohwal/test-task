@@ -3,10 +3,12 @@ import thunkMiddleware from 'redux-thunk'
 import {appProcesses} from '../process-reducer';
 import {useDispatch} from 'react-redux';
 import { appJobs } from '../jobs-reducer';
+import { appFind } from '../find-reducer';
 
 const rootReducer = combineReducers({
     processes: appProcesses,
-    jobs: appJobs
+    jobs: appJobs,
+    find: appFind
 })
 
 export type RootReducerType = typeof rootReducer
