@@ -85,7 +85,7 @@ export const App =  React.memo((props: any) => {
         dispatch(saveJob())
     }
 
-    const onSearchJob = (value: any) => {
+    const onSearchJob = (value: string) => {
         const findJob = findState.filter(i=>i.name.includes(value))
         setRow(findJob)
         setIsSelectedRow(true)
