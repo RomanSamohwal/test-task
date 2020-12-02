@@ -1,24 +1,19 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Table} from './components/Table/Table';
 import _ from 'lodash';
 import {generatorJob, generatorProcessObject, generatorProcessStatus} from './components/utils/GeneraorProcessObject';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from './store/store';
-import {
-    addProcess,
-    deleteProcess,
-    fetchProcesses,
-    orderProcess,
-    saveProcess,
-    setStatus,
-} from './process-reducer';
+import {addProcess, deleteProcess, fetchProcesses, orderProcess, saveProcess, setStatus,} from './process-reducer';
 import {addJobs, deleteJobs, saveJob} from './jobs-reducer';
 import {DetailRowView} from './components/DatailRowView/DetailRowView';
-import { ProcessesType } from './ProcessType';
+import {ProcessesType} from './ProcessType';
 import {JobsArrayType, JobsType} from './JobsType';
 import {fetchJobs} from './Thunks';
+import {ButtonComponent} from './components/Button/Button';
+import { SearchComponent } from './components/Search/Search';
 
-export const AppWithReducer =  React.memo((props: any) => {
+export const App =  React.memo((props: any) => {
     console.log('app render')
     const dispatch = useAppDispatch()
 
@@ -90,27 +85,22 @@ export const AppWithReducer =  React.memo((props: any) => {
         dispatch(saveJob())
     }
 
-    const onFindJob = () => {
-
-    const findJob = findState.filter(i=>i.name.includes(inputValue))
-    setRow(findJob)
-    setIsSelectedRow(true)
-  }
+    const onSearchJob = (value: any) => {
+        const findJob = findState.filter(i=>i.name.includes(value))
+        setRow(findJob)
+        setIsSelectedRow(true)
+    }
 
     return <div>
         <div>
-            <input type="text" onChange={(e) => {
-                setInputValue(e.currentTarget.value)
-            }} value={inputValue}/>
-            <button onClick={onFindJob}>find job</button>
+            <SearchComponent onSearch = {onSearchJob}/>
         </div>
         <div>
-            <button onClick={onAddProcess}>add process</button>
+            <ButtonComponent onClick={onAddProcess} text = {'add process'}/>
         </div>
         {isSelectedRow
             ? <DetailRowView closeTable={isSelectedHandler} data={row}/>
             : <Table data={processes} onSort={onSort} onRowSelect={onRowSelect}
                      addProcess={onAddProcess} delete={onDeleteProcess}/>}
-
     </div>
 })

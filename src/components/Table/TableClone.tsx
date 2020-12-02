@@ -1,34 +1,41 @@
 import React from 'react';
+import styled from 'styled-components';
 import style from './Table.module.css'
 
+const TableWrapper = styled.div`
+    width: 90vw;
+    border: 1px solid black;
+`
+
 export const TableClone = (props: any) => {
-    return <div className={style.table}>
-        <div className={style.item}>
-                <div onClick={props.onSort.bind(null, 'id')} style={{width: '30%', border: '1px solid red'}}>ID</div>
-                <div onClick={props.onSort.bind(null, 'name')} style={{width: '10%', border: '1px solid blue'}}>Name</div>
-                <div onClick={props.onSort.bind(null, 'jobsCount')} style={{width: '10%', border: '1px solid green'}}>jobsCount</div>
-                <div onClick={props.onSort.bind(null, 'startTime')} style={{width: '10%', border: '1px solid brown'}}>startTime</div>
-                <div style={{width: '15%', border: '1px solid yellow'}}>Process</div>
-                <div style={{width: '10%', border: '1px solid black'}}>list jobs</div>
-                <div style={{width: '15%', border: '1px solid orange'}}>delete</div>
+    return <TableWrapper>
+        <div className={style.thead}>
+            <div className={style.tr}>
+                <div className={style.th}>ID</div>
+                <div className={style.th}>Name</div>
+                <div className={style.th}>jobsCount</div>
+                <div className={style.th}>startTime</div>
+                <div className={style.th}>Process</div>
+                <div className={style.th}>delete</div>
+            </div>
         </div>
-        <div className={style.body}>
-        {props.data.map((item: any) => (
-               <div key={item.id} className={style.item}>
-                   <div  className={style.item}>
-                       <div style={{width: '30%',border: '1px solid red'}}>{item.id}</div>
-                       <div style={{width: '10%', border: '1px solid blue'}}>{item.name}</div>
-                       <div style={{width: '10%', border: '1px solid green'}}>{item.jobsCount}</div>
-                       <div style={{width: '10%', border: '1px solid brown'}}>{item.startTime}</div>
-                       <div style={{width: '15%', border: '1px solid yellow'}}>any process..</div>
-                       <div onClick={() => props.onRowSelect(item.id)}
-                            style={{width: '10%', border: '1px solid black'}}>show jobs</div>
-                       <div style={{width: '15%', border: '1px solid orange'}}>
-                         <button  onClick={()=>{props.delete(item.id)}}>delete</button>
-                     </div>
-                   </div>
-               </div>
-        ))}
+        <div className={style.tbody}>
+            <div className={style.tr}>
+                <div className={style.td}>121212121</div>
+                <div className={style.td}>fnwifwfwf</div>
+                <div className={style.td}>10</div>
+                <div className={style.td}>131231313</div>
+                <div className={style.td}>seccessed</div>
+                <div className={style.td}>
+                    <button>delete</button>
+                </div>
+            </div>
         </div>
-    </div>
+    </TableWrapper>
+
+
+    /*<div className={style.table}>
+
+
+    </div>*/
 }

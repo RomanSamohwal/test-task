@@ -1,19 +1,33 @@
 .table {
     width: 90vw;
     border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
-.body {
+.thead {
     width: 100%;
+    border: 1px solid red;
 }
 
-.item{
+.tr {
     width: 100%;
+    border: 1px solid #bb98cd;
     display: flex;
     flex-direction: row;
-    align-items: center;
+}
+
+.th {
+    text-align: center;
+    width: 15vw;
+    border: 1px solid #cdb24b;
+}
+
+.tbody {
+    width: 100%;
+    border: 1px solid blue;
+}
+
+.td {
+    text-align: center;
+    width: 15vw;
+    border: 1px solid #51cd59
 }
