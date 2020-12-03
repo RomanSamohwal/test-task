@@ -3,11 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {ButtonComponent} from '../Button/Button';
 
 export const Table = React.memo((props: any) => {
-
-    return <table className='table table-striped' style={{cursor: "pointer"}}>
+        return <table className='table table-striped' style={{cursor: "pointer"}}>
             <thead>
             <tr>
-                <th onClick={props.onSort.bind(null, 'id')}>ID{' '}
+                <th onClick={props.onSort.bind(null, 'id')}>
+                    ID{' '}
                     {props.sortField === "id" ? <small>{props.sort}</small> : null}
                 </th>
                 <th onClick={props.onSort.bind(null, 'name')}>NAME{' '}
@@ -29,21 +29,23 @@ export const Table = React.memo((props: any) => {
             <tbody>
             {props.data.map((item: any) => (
                 <tr key={item.id}>
-                       <td>{item.id}</td>
-                       <td>{item.name}</td>
-                       <td>{item.jobsCount}</td>
-                       <td>{item.startTime}</td>
-                       <td>{item.status}</td>
-                       <td>
-                           <ButtonComponent
-                               onClick={() => props.onRowSelect(item.id)}
-                               text = {'jobs'}
-                           />
-                       </td>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.jobsCount}</td>
+                    <td>{item.startTime}</td>
+                    <td>{item.status}</td>
                     <td>
                         <ButtonComponent
-                            onClick={() => {props.delete(item.id)}}
-                            text = {'delete'}
+                            onClick={() => props.onRowSelect(item.id)}
+                            text={'jobs'}
+                        />
+                    </td>
+                    <td>
+                        <ButtonComponent
+                            onClick={() => {
+                                props.delete(item.id)
+                            }}
+                            text={'delete'}
                         />
                     </td>
                 </tr>
