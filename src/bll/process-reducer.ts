@@ -1,31 +1,9 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit"
-import {restoreProcesses, saveProcesses} from './dal/localStorage';
-import {ProcessesType, ProcessType} from './ProcessType';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { ProcessesType, ProcessType } from '../utils/types/types';
+
+import {fetchProcesses} from './thunks';
 
 const initialState = [] as ProcessesType
-
-export const fetchProcesses = createAsyncThunk('processes/fetchProcesses',
-    async (param, {dispatch, rejectWithValue, getState}) => {
-        try {
-            let processes = await restoreProcesses()
-            return {processes}
-        } catch (error) {
-
-        }
-    })
-
-export const saveProcess = createAsyncThunk('processes/saveProcess',
-    async (param, {dispatch, rejectWithValue, getState}) => {
-        try {
-            let state = getState()
-            // @ts-ignore
-            let allProcesses = state.processes
-            await saveProcesses(allProcesses)
-            return
-        } catch (error) {
-
-        }
-    })
 
 const slice = createSlice({
     name: 'processes',

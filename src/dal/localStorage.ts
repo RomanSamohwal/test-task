@@ -1,9 +1,5 @@
-import {processId1, processId2} from '../ProcessesId';
-import {v1} from 'uuid';
-
-const jobId1 = v1()
-const jobId3 = v1()
-const jobId4 = v1()
+import {jobId1} from '../utils/JobsId';
+import {processId1, processId2} from '../utils/ProcessesId';
 
 let initProcess = [
     {id: processId1, name: 'Process1', jobsCount: 2, startTime: 12},
@@ -11,8 +7,8 @@ let initProcess = [
 ]
 
 let initJobs = [{id: jobId1, name: 'JobProc1', processId: processId1, status: 'running'},
-    {id: jobId3, name: 'JobProc2', processId: processId2, status: 'failed'}, {
-        id: jobId4,
+    {id: jobId1, name: 'JobProc2', processId: processId2, status: 'failed'}, {
+        id: jobId1,
         name: 'JobProc2',
         processId: processId2,
         status: 'failed'

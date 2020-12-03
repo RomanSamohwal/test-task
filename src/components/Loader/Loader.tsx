@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import './Loader.css';
 
 const LoaderComponent = styled.div`
     width: 64px;

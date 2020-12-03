@@ -1,11 +1,13 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk'
-import {appProcesses} from '../process-reducer';
+import {appProcesses} from '../bll/process-reducer';
 import {useDispatch} from 'react-redux';
-import { appJobs } from '../jobs-reducer';
-import { appFind } from '../find-reducer';
+import { appJobs } from '../bll/jobs-reducer';
+import { appFind } from '../bll/find-reducer';
+import {appReducer} from '../bll/app-reducer';
 
 const rootReducer = combineReducers({
+    app: appReducer,
     processes: appProcesses,
     jobs: appJobs,
     find: appFind

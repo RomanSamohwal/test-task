@@ -1,3 +1,12 @@
+export type ProcessesType = Array<ProcessType>;
+export type ProcessType = {
+    id: string
+    name: string
+    startTime: number
+    jobsCount: number
+    status?: string
+}
+
 export type JobsType = {
     [key: string]: JobsArrayType
 }
@@ -14,3 +23,4 @@ export enum JobStatuses {
     successed = 1,
     failed = 2,
 }
+

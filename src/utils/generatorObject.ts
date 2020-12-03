@@ -1,6 +1,6 @@
 import {v1} from 'uuid';
-import {JobsArrayType, JobStatuses, JobType} from '../../JobsType';
-import {ProcessType} from '../../ProcessType';
+import {JobsArrayType, JobStatuses, JobType, ProcessType} from './types/types';
+
 
 export const generatorProcessObject = (): ProcessType => {
     const id = v1()

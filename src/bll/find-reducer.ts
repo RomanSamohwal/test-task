@@ -1,6 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit"
-import {JobsArrayType} from "./JobsType";
-import {fetchJobs} from "./Thunks";
+import {createSlice} from '@reduxjs/toolkit'
+import { JobsArrayType } from '../utils/types/types';
+
+import {fetchJobs} from './thunks';
 
 const initialState = [] as JobsArrayType
 
@@ -10,7 +11,7 @@ const slice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder.addCase(fetchJobs.fulfilled, (state, action) => {
-           return  action.payload.jobs
+            return action.payload.jobs
         })
     }
 })
