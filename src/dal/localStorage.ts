@@ -7,12 +7,8 @@ let initProcess = [
 ]
 
 let initJobs = [{id: jobId1, name: 'JobProc1', processId: processId1, status: 'running'},
-    {id: jobId1, name: 'JobProc2', processId: processId2, status: 'failed'}, {
-        id: jobId1,
-        name: 'JobProc2',
-        processId: processId2,
-        status: 'failed'
-    }]
+    {id: jobId1, name: 'JobProc2', processId: processId2, status: 'failed'},
+    {id: jobId1, name: 'JobProc3', processId: processId2, status: 'failed'}]
 
 
 export const saveProcesses = (state: any) => {
@@ -23,17 +19,17 @@ export const saveJobs = (state: any) => {
     localStorage.setItem('jobs', JSON.stringify(state));
 };
 
-export const restoreProcesses = () => {
+export const restoreProcesses = async () => {
     if (localStorage.getItem('processes') === null) {
-        return initProcess
+            return initProcess
     } else {
         return JSON.parse(<string>localStorage.getItem('processes'))
     }
 };
 
-export const restoreJobs = () => {
+export const restoreJobs =  () => {
     if (localStorage.getItem('jobs') === null) {
-        return initJobs
+            return initJobs
     } else {
         return JSON.parse(<string>localStorage.getItem('jobs'))
     }

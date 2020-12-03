@@ -1,17 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Loader} from '../components/Loader/Loader';
 import {RenderContainer} from '../fatures/data-render/RenderContainer';
 import {useSelector} from 'react-redux';
-import {AppRootStateType} from './store';
-import { Loader } from '../components/Loader/Loader';
+import {AppRootStateType, useAppDispatch} from './store';
+import {setAppStatus} from '../bll/app-reducer';
 
 export const AppContainer = React.memo(() => {
+    const dispatch = useAppDispatch()
     let status = useSelector<AppRootStateType>(state => state.app.status)
-
-   /* if (status === 'loading') {
-        return <Loader/>
-    }*/
-
+    let [firstRender, setFirstRender] = useState(true)
+    if (firstRender) {
+        dispatch(setAppStatus({status: 'loading'}))
+        setTimeout(() => {
+            dispatch(setAppStatus({status: 'succeeded'}))
+        }, 1000)
+        setFirstRender(false)
+    }
     return <>
-        <RenderContainer/>
+        {status === 'loading' ? <Loader/> : <RenderContainer/>}
     </>
 })
