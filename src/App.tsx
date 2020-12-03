@@ -12,9 +12,9 @@ import {JobsArrayType, JobsType} from './JobsType';
 import {fetchJobs} from './Thunks';
 import {ButtonComponent} from './components/Button/Button';
 import { SearchComponent } from './components/Search/Search';
+import {Loader} from './components/Loader/Loader';
 
 export const App =  React.memo((props: any) => {
-    console.log('app render')
     const dispatch = useAppDispatch()
 
     let [firstRender,setFirstRender] = useState(true)
@@ -22,7 +22,6 @@ export const App =  React.memo((props: any) => {
     let [row, setRow] = useState<any>(null)
     let [sortField, setSortField] = useState('id')
     let [isSelectedRow, setIsSelectedRow ] = useState(false)
-    let [inputValue, setInputValue] = useState('')
 
     let processes = useSelector<AppRootStateType, ProcessesType>(state => state.processes)
     let jobs = useSelector<AppRootStateType,JobsType>(state => state.jobs)
@@ -44,7 +43,7 @@ export const App =  React.memo((props: any) => {
         onGenerateJobs(jobs)
     }, [jobs])
 
-    const onSort = (sortField: any) => {
+    const onSort = (sortField: string) => {
         const cloneData = processes.concat();
         const sortType = sort === 'asc' ? 'desc' : 'asc';
         const order = _.orderBy(cloneData, sortField, sortType);
@@ -57,7 +56,7 @@ export const App =  React.memo((props: any) => {
         setIsSelectedRow(false)
     }, [isSelectedRow])
 
-    const onRowSelect = (id: any) => {
+    const onRowSelect = (id: string) => {
         let selectedRow = jobs[id]
         setRow(selectedRow)
         setIsSelectedRow(true)
@@ -86,9 +85,12 @@ export const App =  React.memo((props: any) => {
     }
 
     const onSearchJob = (value: string) => {
-        const findJob = findState.filter(i=>i.name.includes(value))
+        const findJob = findState.filter(i => i.name.toLowerCase().includes(value.toLowerCase()))
         setRow(findJob)
-        setIsSelectedRow(true)
+        debugger
+        if(findJob.length){
+            setIsSelectedRow(true)
+        }
     }
 
     return <div>
@@ -98,9 +100,17 @@ export const App =  React.memo((props: any) => {
         <div>
             <ButtonComponent onClick={onAddProcess} text = {'add process'}/>
         </div>
-        {isSelectedRow
+        {
+              isSelectedRow
             ? <DetailRowView closeTable={isSelectedHandler} data={row}/>
-            : <Table data={processes} onSort={onSort} onRowSelect={onRowSelect}
-                     addProcess={onAddProcess} delete={onDeleteProcess}/>}
+            : <Table data={processes}
+                     onSort={onSort}
+                     onRowSelect={onRowSelect}
+                     addProcess={onAddProcess}
+                     delete={onDeleteProcess}
+                     sort = {sort}
+                     sortField = {sortField}
+            />
+        }
     </div>
 })

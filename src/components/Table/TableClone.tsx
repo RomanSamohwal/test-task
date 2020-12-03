@@ -32,10 +32,4 @@ export const TableClone = (props: any) => {
             </div>
         </div>
     </TableWrapper>
-
-
-    /*<div className={style.table}>
-
-
-    </div>*/
 }

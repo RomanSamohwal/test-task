@@ -1,4 +1,5 @@
 import React from 'react';
+import {ButtonComponent} from '../Button/Button';
 
 export const DetailRowView = (props: any) => {
     return <>
@@ -6,10 +7,14 @@ export const DetailRowView = (props: any) => {
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>processId</th>
-                <th>status</th>
-                <th onClick={()=>{props.closeTable()}}>X</th>
+                <th>NAME</th>
+                <th>PROCESS ID</th>
+                <th>STATUS</th>
+                <th>
+                    <ButtonComponent
+                    onClick={() => {props.closeTable()}}
+                    text={'close'}/>
+                </th>
             </tr>
             </thead>
             <tbody>

@@ -16,10 +16,8 @@ const suffix = (
 export const SearchComponent = (props: any) => {
 
     const onSearch = (value: string) => {
-        if (value !== '') {
-            let findValue = value.trim()
+            let findValue = value.trim().toLowerCase()
             props.onSearch(findValue)
-        }
     }
 
     return <>
