@@ -9,11 +9,11 @@ const Container = styled.div`
   align-items: center; 
   justify-content: center;
 `
-export const Loader = () => {
+export const Loader = React.memo(() => {
     return <>
         <Container>
             <Spin/>
         </Container>
     </>
-}
+})
 

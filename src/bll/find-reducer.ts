@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { JobsArrayType } from '../utils/types/types';
+import {JobsArrayType} from '../utils/types/types';
 
 import {fetchJobs} from './thunks';
 

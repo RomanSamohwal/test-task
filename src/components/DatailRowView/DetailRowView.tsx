@@ -1,9 +1,9 @@
 import React from 'react';
 import {ButtonComponent} from '../Button/Button';
 
-export const DetailRowView = (props: any) => {
+export const DetailRowView = React.memo((props: any) => {
     return <>
-        <table className="table" style={{ cursor: "pointer" }}>
+        <table className="table" style={{cursor: "pointer"}}>
             <thead>
             <tr>
                 <th>ID</th>
@@ -12,8 +12,10 @@ export const DetailRowView = (props: any) => {
                 <th>STATUS</th>
                 <th>
                     <ButtonComponent
-                    onClick={() => {props.closeTable()}}
-                    text={'close'}/>
+                        onClick={() => {
+                            props.closeTable()
+                        }}
+                        text={'close'}/>
                 </th>
             </tr>
             </thead>
@@ -29,4 +31,4 @@ export const DetailRowView = (props: any) => {
             </tbody>
         </table>
     </>
-}
+})

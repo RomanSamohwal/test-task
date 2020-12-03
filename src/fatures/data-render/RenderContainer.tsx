@@ -5,14 +5,14 @@ import {JobsType} from '../../utils/types/types';
 import {generatorProcessStatus} from '../../utils/generatorObject';
 import {setStatus} from '../../bll/process-reducer';
 import {fetchJobs, fetchProcesses} from '../../bll/thunks';
-import {SearchContainer} from '../search/SearchContainer';
-import {DetailRowViewContainer} from './DetailRowViewContainer';
+import {DetailRowViewContainerComponent} from './DetailRowViewContainer';
 import {TableContainer} from './TableContainer';
 
 export const RenderContainer = React.memo(() => {
     const dispatch = useAppDispatch()
+
     let [firstRender, setFirstRender] = useState(true)
-    let [row, setRow] = useState<any>(null)
+    let [row, setRow] = useState(null)
     let [isSelectedRow, setIsSelectedRow] = useState(false)
     let jobs = useSelector<AppRootStateType, JobsType>(state => state.jobs)
 
@@ -33,13 +33,17 @@ export const RenderContainer = React.memo(() => {
     }, [jobs])
 
     return <>
-        <SearchContainer setRow={setRow}
-                         setIsSelectedRow={setIsSelectedRow}
-        />
         {
             isSelectedRow
-                ? <DetailRowViewContainer setIsSelectedRow={setIsSelectedRow} data={row}/>
-                : <TableContainer setRow={setRow} setIsSelectedRow={setIsSelectedRow}/>
+                ? <DetailRowViewContainerComponent
+                    setIsSelectedRow={setIsSelectedRow}
+                    data={row}
+                    setRow={setRow}/>
+                : <>
+                    <TableContainer
+                        setRow={setRow}
+                        setIsSelectedRow={setIsSelectedRow}/>
+                </>
         }
     </>
 })

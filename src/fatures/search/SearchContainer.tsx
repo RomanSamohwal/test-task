@@ -4,7 +4,7 @@ import {AppRootStateType} from '../../app/store';
 import {JobsArrayType} from '../../utils/types/types';
 import {SearchComponent} from '../../components/Search/Search';
 
-export const SearchContainer = (props: any) => {
+export const SearchContainer = React.memo((props: any) => {
 
     let findState = useSelector<AppRootStateType, JobsArrayType>(state => state.find)
 
@@ -19,4 +19,4 @@ export const SearchContainer = (props: any) => {
     return <>
         <SearchComponent onSearch={onSearchJob}/>
     </>
-}
+})

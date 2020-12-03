@@ -9,8 +9,10 @@ import {addJobs, deleteJobs} from '../../bll/jobs-reducer';
 import {saveJob, saveProcess} from '../../bll/thunks';
 import {generatorJob, generatorProcessObject, generatorProcessStatus} from '../../utils/generatorObject';
 import {ButtonComponent} from '../../components/Button/Button';
+import {Container, TableStyleContainer} from './TableStyle';
 
 export const TableContainer = React.memo((props: any) => {
+
     const dispatch = useAppDispatch()
     let processes = useSelector<AppRootStateType, ProcessesType>(state => state.processes)
 
@@ -55,8 +57,10 @@ export const TableContainer = React.memo((props: any) => {
         dispatch(saveJob())
     }
 
-    return <>
-        <ButtonComponent onClick={onAddProcess} text={'add process'}/>
+    return <TableStyleContainer>
+        <Container>
+            <ButtonComponent onClick={onAddProcess} text={'add process'}/>
+        </Container>
         <Table data={processes}
                onSort={onSort}
                onRowSelect={onRowSelect}
@@ -65,5 +69,5 @@ export const TableContainer = React.memo((props: any) => {
                sort={sort}
                sortField={sortField}
         />
-    </>
+    </TableStyleContainer>
 })
